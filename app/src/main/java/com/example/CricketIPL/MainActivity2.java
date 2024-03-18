@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class MainActivity2 extends AppCompatActivity {
 
     CardView cardView1, cardView2;
+
     Button b1,music_btn;
     MediaPlayer mp1 = new MediaPlayer();
 
