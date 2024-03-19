@@ -20,7 +20,10 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,17 +38,33 @@ public class MainActivity extends AppCompatActivity {
     int resplayer1, resplayer2, australia, india, resplayer1change, resplayer2change;
     Double ov1 = 0.0;
     Double ov2 = 0.0;
-    int check1 = 0, check2 = 0;
     int checknoball=0;
     int outflag = 0;
     ImageView roller, imgset, imgplayerplay1, imgplayerplay2;
     TextView txtrun1, txtrun2, txtout1, txtout2, txtname1, txtname2, txtplayerrun1, txtplayerrun2, over1, over2;
     Random random = new Random();
-    String out_name1 = "Kohli",out_name2="Smith";
+    String out_name1,out_name2;
+    String t1="MI",t2="CSK";
+    Set<String> keySet1,keySet2;
+    String[] keys1,keys2;
     Handler handler = new Handler();
     int[] diceImages = new int[]{R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6};
 
-    int[] MI = new int[]{R.drawable.rohit,R.drawable.kishan,R.drawable.suryakumar};
+    HashMap<String, Integer> mi = new LinkedHashMap<>();
+    HashMap<String, Integer> csk = new LinkedHashMap<>();
+    HashMap<String, Integer> dc = new LinkedHashMap<>();
+    HashMap<String, Integer> gt = new LinkedHashMap<>();
+    HashMap<String, Integer> kkr = new LinkedHashMap<>();
+    HashMap<String, Integer> lsg = new LinkedHashMap<>();
+    HashMap<String, Integer> pk = new LinkedHashMap<>();
+    HashMap<String, Integer> rcb = new LinkedHashMap<>();
+    HashMap<String, Integer> rr = new LinkedHashMap<>();
+    HashMap<String, Integer> srh = new LinkedHashMap<>();
+
+    HashMap<String, HashMap<String,Integer>> teams = new LinkedHashMap<>();
+
+    HashMap<String, Integer> team1;
+    HashMap<String, Integer> team2;
 
     ImageView out, six, four, wide, noball;
     LottieAnimationView lottie, lottie2, lottieOut, lottieFour, lottieSix, lottieNo;
@@ -132,11 +151,7 @@ public class MainActivity extends AppCompatActivity {
         txtplayerrun1.setText("0");
         txtplayerrun2.setText("0");
 
-        resplayer1 = getResources().getIdentifier("virat", "drawable", getPackageName());
-        resplayer2 = getResources().getIdentifier("steve", "drawable", getPackageName());
 
-        resplayer1change = resplayer1;
-        resplayer2change = resplayer2;
 
 //        String check123 = getIntent().getStringExtra("check");
 //        int opt = Integer.parseInt(check123);
@@ -179,6 +194,41 @@ public class MainActivity extends AppCompatActivity {
 
          */
 
+        intializeTeam();
+
+        teams.put("MI",mi);
+        teams.put("CSK",csk);
+        teams.put("DC",dc);
+        teams.put("GT",gt);
+        teams.put("KKR",kkr);
+        teams.put("LSG",lsg);
+        teams.put("PK",pk);
+        teams.put("RCB",rcb);
+        teams.put("RR",rr);
+        teams.put("SRH",srh);
+
+        team1 = teams.get(t1);
+        team2 = teams.get(t2);
+
+
+
+
+
+        keySet1 = team1.keySet();
+        keys1 = keySet1.toArray(new String[0]);
+
+        out_name1 = keys1[0];
+        resplayer1 = team1.get(out_name1);
+
+        keySet2 = team2.keySet();
+        keys2 = keySet2.toArray(new String[0]);
+
+        out_name2 = keys2[0];
+        resplayer2 = team2.get(out_name2);
+
+        resplayer1change = resplayer1;
+        resplayer2change = resplayer2;
+
         showRules();
 
         roller.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +242,70 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void intializeTeam() {
+
+        mi.put("Rohit",R.drawable.rohit);
+        mi.put("Kishan",R.drawable.kishan);
+        mi.put("Suryakumar",R.drawable.suryakumar);
+        mi.put("Tilak",R.drawable.tilak);
+        mi.put("Tim",R.drawable.tim);
+
+        csk.put("Gaikwad",R.drawable.rutu);
+        csk.put("Ali",R.drawable.moeen);
+        csk.put("Jadeja",R.drawable.jadeja);
+        csk.put("Dhoni",R.drawable.dhoni);
+        csk.put("Dube",R.drawable.dube);
+
+        dc.put("Warner",R.drawable.warner);
+        dc.put("Prithvi",R.drawable.shaw);
+        dc.put("Marsh",R.drawable.marsh);
+        dc.put("Axar",R.drawable.axar);
+        //dc.put("Warner",R.drawable.warner);
+
+        gt.put("Gill",R.drawable.gill);
+        gt.put("Kane",R.drawable.kane);
+        gt.put("Saha",R.drawable.saha);
+        gt.put("Miller",R.drawable.miller);
+        gt.put("Shankar",R.drawable.shankar);
+
+        kkr.put("Shreyas",R.drawable.shreyas);
+        kkr.put("Venky",R.drawable.venky);
+        kkr.put("Nitesh",R.drawable.rana);
+        kkr.put("Russell",R.drawable.rusell);
+        kkr.put("Rinku",R.drawable.rinku);
+
+        lsg.put("KL",R.drawable.kl);
+        lsg.put("De cock",R.drawable.decock);
+        lsg.put("Krunal",R.drawable.kp);
+        lsg.put("Pooran",R.drawable.pooran);
+        lsg.put("Stoinis",R.drawable.stoinis);
+
+        pk.put("Dhawan",R.drawable.dhawan);
+        pk.put("Bairstow",R.drawable.bairstow);
+        pk.put("Livingston",R.drawable.liam);
+        pk.put("Sam Curran",R.drawable.curran);
+        pk.put("Arshadeep",R.drawable.arshadeep);
+
+        rcb.put("Faf",R.drawable.faf);
+        rcb.put("Kohli",R.drawable.kohli);
+        rcb.put("Maxwell",R.drawable.maxwell);
+        rcb.put("Anuj",R.drawable.anuj);
+        rcb.put("DK",R.drawable.dk);
+
+        rr.put("Jaiswal",R.drawable.jaiswal);
+        rr.put("Buttler",R.drawable.buttler);
+        rr.put("Sanju",R.drawable.sanju);
+        rr.put("Riyan",R.drawable.parag);
+        rr.put("Hetmyer",R.drawable.hetmyer);
+
+        srh.put("Markhram",R.drawable.aiden);
+        srh.put("Mayank",R.drawable.mayank);
+        srh.put("klassen",R.drawable.klassen);
+        srh.put("Phillips",R.drawable.phillips);
+        srh.put("Tripathi",R.drawable.tripati);
 
     }
 
@@ -383,33 +497,36 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-                    if (score1 == 7 || score1 == 19 || score1 == 29 || score1 == 37 || score1 == 44 || score1 == 52 || score1 == 60 || score1 == 68 || score1 == 73 || score1 == 85 || score1 == 94) {
+                    if (score1 == 7 || score1 == 19 || score1 == 29 || score1 == 37 || score1 == 44 || score1 == 52 || score1 == 60 || score1 == 68 || score1 == 73 || score1 == 85 || score1 == 94 ) {
 
                         outflag = 1;
                         out1++;
                         run1 = 0;
 
+
+
+
                         if (out1 == 1) {
-                            out_name1= "Rohit";
-                            resplayer1change = getResources().getIdentifier("rohit", "drawable", getPackageName());
+                            out_name1= keys1[1];
+                            resplayer1change = team1.get(out_name1);
                         }
                         if (out1 == 2) {
-                            out_name1= "KL";
-                            resplayer1change = getResources().getIdentifier("kl", "drawable", getPackageName());
+                            out_name1= keys1[2];
+                            resplayer1change = team1.get(out_name1);
 
                         }
                         if (out1 == 3) {
-                            out_name1= "Dhoni";
-                            resplayer1change = getResources().getIdentifier("dhoni", "drawable", getPackageName());
+                            out_name1= keys1[3];
+                            resplayer1change = team1.get(out_name1);
 
                         }
                         if (out1 == 4) {
-                            out_name1= "Jadeja";
-                            resplayer1change = getResources().getIdentifier("jadeja", "drawable", getPackageName());
+                            out_name1= keys1[4];
+                            resplayer1change = team1.get(out_name1);
                         }
 
                         if(out1 == 5){
-                            outnotify("Australia");
+                            outnotify(t2);
                         }
 
                     }
@@ -566,31 +683,32 @@ public class MainActivity extends AppCompatActivity {
 
                     }
 
-                    if (score2 == 7 || score2 == 19 || score2 == 29 || score2 == 37 || score2 == 44 || score2 == 52 || score2 == 60 || score2 == 68 || score2 == 73 || score2 == 85 || score2 == 94) {
+                    if (score2 == 7 || score2 == 19 || score2 == 29 || score2 == 37 || score2 == 44 || score2 == 52 || score2 == 60 || score2 == 68 || score2 == 73 || score2 == 85 || score2 == 94 ) {
 
                         outflag=1;
                         out2++;
                         run2 = 0;
 
+
                         if (out2 == 1) {
-                            out_name2 = "Finch";
-                            resplayer2change = getResources().getIdentifier("finch", "drawable", getPackageName());
+                            out_name2 = keys2[1];
+                            resplayer2change = team2.get(out_name2);
                         }
                         if (out2 == 2) {
-                            out_name2 = "Warner";
-                            resplayer2change = getResources().getIdentifier("warner", "drawable", getPackageName());
+                            out_name2 = keys2[2];
+                            resplayer2change = team2.get(out_name2);
                         }
                         if (out2 == 3) {
-                            out_name2 = "Watson";
-                            resplayer2change = getResources().getIdentifier("watson", "drawable", getPackageName());
+                            out_name2 = keys2[3];
+                            resplayer2change = team2.get(out_name2);
                         }
                         if (out2 == 4) {
-                            out_name2 = "Marnus";
-                            resplayer2change = getResources().getIdentifier("marnus", "drawable", getPackageName());
+                            out_name2 = keys2[4];
+                            resplayer2change = team2.get(out_name2);
                         }
 
                         if(out2 == 5){
-                            outnotify("India");
+                            outnotify(t1);
                         }
 
                     }
