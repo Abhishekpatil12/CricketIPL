@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     Handler handler = new Handler();
     int[] diceImages = new int[]{R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6};
 
+    int[] MI = new int[]{R.drawable.rohit,R.drawable.kishan,R.drawable.suryakumar};
+
     ImageView out, six, four, wide, noball;
     LottieAnimationView lottie, lottie2, lottieOut, lottieFour, lottieSix, lottieNo;
 
