@@ -242,7 +242,7 @@
         android:id="@+id/view2"
         android:layout_width="340dp"
         android:layout_height="450dp"
-        android:background="@color/black"
+        android:background="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@id/gridLayout"
         app:layout_constraintEnd_toEndOf="@id/gridLayout"
         app:layout_constraintStart_toStartOf="@id/gridLayout"
@@ -319,7 +319,7 @@
 
         <ImageView
             android:id="@+id/imageView91"
-            android:layout_width="33dp"
+            android:layout_width="34dp"
             android:layout_height="45dp"
             app:srcCompat="@drawable/img_91" />
 
