@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtrun1, txtrun2, txtout1, txtout2, txtname1, txtname2, txtplayerrun1, txtplayerrun2, over1, over2;
     Random random = new Random();
     String out_name1,out_name2;
-    String t1="MI",t2="CSK";
+    String t1,t2;
     Set<String> keySet1,keySet2;
     String[] keys1,keys2;
     Handler handler = new Handler();
@@ -151,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
         txtplayerrun1.setText("0");
         txtplayerrun2.setText("0");
 
+        t1 = getIntent().getStringExtra("team1");
+        t2 = getIntent().getStringExtra("team2");
+
+        System.out.println(t1+" "+t2);
+
+
+
 
 
 //        String check123 = getIntent().getStringExtra("check");
@@ -228,6 +235,13 @@ public class MainActivity extends AppCompatActivity {
 
         resplayer1change = resplayer1;
         resplayer2change = resplayer2;
+
+        imgplayerplay1.setImageResource(resplayer1);
+        imgplayerplay2.setImageResource(resplayer2);
+
+        txtname1.setText(out_name1);
+        txtname2.setText(out_name2);
+
 
         showRules();
 

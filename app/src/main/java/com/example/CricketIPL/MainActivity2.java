@@ -150,9 +150,11 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 if(arr.size() == 2){
                     Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                    startActivity(intent);
+                    System.out.println(arr.get(0)+" "+arr.get(1));
                     intent.putExtra("team1",arr.get(0));
                     intent.putExtra("team2",arr.get(1));
+                    intent.putExtra("check","1");
+                    startActivity(intent);
                     finish();
                 }else{
                     Toast.makeText(MainActivity2.this, "Select 2 teams", Toast.LENGTH_SHORT).show();
