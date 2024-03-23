@@ -22,7 +22,7 @@ public class MainActivity2 extends AppCompatActivity {
     CardView cardView1, cardView2;
     Dialog dialog;
 
-    Button b1,music_btn;
+    Button music_btn;
     MediaPlayer mp1 = new MediaPlayer();
     TextView team1txt, team2txt, heading;
 
@@ -35,7 +35,6 @@ public class MainActivity2 extends AppCompatActivity {
         cardView1 = findViewById(R.id.cardView1);
         cardView2 = findViewById(R.id.cardView2);
 
-        b1 = findViewById(R.id.button);
 //hello
 //        mp1.setAudioStreamType(AudioManager.STREAM_MUSIC);
 //        String path1 = "android.resource://" + getPackageName() + "/raw/wdlbobsbeat";
@@ -66,12 +65,7 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 */
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity2.this, "Future Goal !!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         /*
 
@@ -89,38 +83,25 @@ public class MainActivity2 extends AppCompatActivity {
 
          */
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity2.this, "Future Goal !!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
         cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-//                intent.putExtra("check","1");
-//                startActivity(intent);
-//                finish();
-                iplTeams();
+                iplTeams(v);
             }
         });
 
         cardView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                intent.putExtra("check","2");
-                startActivity(intent);
-                finish();
+                iplTeams(v);
             }
         });
 
     }
 
-    private void iplTeams(){
+    private void iplTeams(View view){
         dialog = new Dialog(MainActivity2.this);
         dialog.setContentView(R.layout.team_selecttion);
         dialog.setCancelable(false);
@@ -153,7 +134,11 @@ public class MainActivity2 extends AppCompatActivity {
                     System.out.println(arr.get(0)+" "+arr.get(1));
                     intent.putExtra("team1",arr.get(0));
                     intent.putExtra("team2",arr.get(1));
-                    intent.putExtra("check","1");
+                    if(view == cardView1){
+                        intent.putExtra("check","1");
+                    }else{
+                        intent.putExtra("check","2");
+                    }
                     startActivity(intent);
                     finish();
                 }else{
@@ -238,13 +223,15 @@ public class MainActivity2 extends AppCompatActivity {
         if(arr.size() == 0){
             heading.setText("Select Team 2");
             String team1 = img.getResources().getResourceEntryName(img.getId()).toUpperCase();
-            img.setImageResource(R.drawable.india);
+            int resID = getResources().getIdentifier(team1.toLowerCase()+"_blur", "drawable", getPackageName());
+            img.setImageResource(resID);
             img.setClickable(false);
             team1txt.setText(team1);
             arr.add(team1);
         }else if(arr.size() == 1){
             String team2 = img.getResources().getResourceEntryName(img.getId()).toUpperCase();
-            img.setImageResource(R.drawable.india);
+            int resID = getResources().getIdentifier(team2.toLowerCase()+"_blur", "drawable", getPackageName());
+            img.setImageResource(resID);
             img.setClickable(false);
             team2txt.setText(team2);
             arr.add(team2);
