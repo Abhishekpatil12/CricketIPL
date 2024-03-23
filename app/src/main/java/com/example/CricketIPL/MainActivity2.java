@@ -109,7 +109,8 @@ public class MainActivity2 extends AppCompatActivity {
         ArrayList<String> arr = new ArrayList<>();
 
 
-        Button b1 = dialog.findViewById(R.id.start);
+        Button start = dialog.findViewById(R.id.start);
+        Button cancel = dialog.findViewById(R.id.cancel);
         ImageView csk = dialog.findViewById(R.id.csk);
         ImageView mi = dialog.findViewById(R.id.mi);
         ImageView dc = dialog.findViewById(R.id.dc);
@@ -126,7 +127,7 @@ public class MainActivity2 extends AppCompatActivity {
         heading = dialog.findViewById(R.id.heading);
         dialog.show();
 
-        b1.setOnClickListener(new View.OnClickListener() {
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(arr.size() == 2){
@@ -144,6 +145,13 @@ public class MainActivity2 extends AppCompatActivity {
                 }else{
                     Toast.makeText(MainActivity2.this, "Select 2 teams", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
 
