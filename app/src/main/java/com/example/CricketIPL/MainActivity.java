@@ -22,6 +22,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 
@@ -35,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
     int flag = 0, run1 = 0, run2 = 0;
     int score1 = 0, score2 = 0;
     int out1 = 0, out2 = 0;
-    int resplayer1, resplayer2, australia, india, resplayer1change, resplayer2change;
+    int resplayer1, resplayer2, resplayer1change, resplayer2change;
     Double ov1 = 0.0;
     Double ov2 = 0.0;
     int checknoball=0;
     int outflag = 0;
-    ImageView roller, imgset, imgplayerplay1, imgplayerplay2;
-    TextView txtrun1, txtrun2, txtout1, txtout2, txtname1, txtname2, txtplayerrun1, txtplayerrun2, over1, over2;
+    int team1logo,team2logo;
+    ImageView roller, imgset, imgplayerplay1, imgplayerplay2,logo1,logo2;
+    TextView txtrun1, txtrun2, txtout1, txtout2, txtname1, txtname2, txtplayerrun1, txtplayerrun2, over1, over2,txtteam1,txtteam2;
     Random random = new Random();
     String out_name1,out_name2;
     String t1,t2;
@@ -120,8 +122,7 @@ public class MainActivity extends AppCompatActivity {
         lottieFour = findViewById(R.id.lottie6);
         translate2 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.translate2);
 
-        australia = getResources().getIdentifier("australia", "drawable", getPackageName());
-        india = getResources().getIdentifier("india", "drawable", getPackageName());
+
 
         roller = findViewById(R.id.roller1);
         txtrun1 = findViewById(R.id.textView4);
@@ -136,8 +137,14 @@ public class MainActivity extends AppCompatActivity {
         txtplayerrun1 = findViewById(R.id.textView8);
         txtplayerrun2 = findViewById(R.id.textView7);
 
+        txtteam1 = findViewById(R.id.textView);
+        txtteam2 = findViewById(R.id.textView2);
+
         imgplayerplay1 = findViewById(R.id.imageView101);
         imgplayerplay2 = findViewById(R.id.imageView102);
+
+        logo1 = findViewById(R.id.team1);
+        logo2 = findViewById(R.id.team2);
 
         over1 = findViewById(R.id.textView15);
         over2 = findViewById(R.id.textView16);
@@ -154,8 +161,15 @@ public class MainActivity extends AppCompatActivity {
         t1 = getIntent().getStringExtra("team1");
         t2 = getIntent().getStringExtra("team2");
 
+        txtteam1.setText(t1);
+        txtteam2.setText(t2);
         System.out.println(t1+" "+t2);
 
+        team1logo = getResources().getIdentifier(t1.toLowerCase(), "drawable", getPackageName());
+        team2logo = getResources().getIdentifier(t2.toLowerCase(), "drawable", getPackageName());
+
+        logo1.setImageResource(team1logo);
+        logo2.setImageResource(team2logo);
 
 
 
@@ -264,20 +278,20 @@ public class MainActivity extends AppCompatActivity {
         mi.put("Rohit",R.drawable.rohit);
         mi.put("Kishan",R.drawable.kishan);
         mi.put("Suryakumar",R.drawable.suryakumar);
+        mi.put("Hardik",R.drawable.hardik);
         mi.put("Tilak",R.drawable.tilak);
-        mi.put("Tim",R.drawable.tim);
 
         csk.put("Gaikwad",R.drawable.rutu);
-        csk.put("Ali",R.drawable.moeen);
+        csk.put("Rachin",R.drawable.rachin);
         csk.put("Jadeja",R.drawable.jadeja);
         csk.put("Dhoni",R.drawable.dhoni);
         csk.put("Dube",R.drawable.dube);
 
         dc.put("Warner",R.drawable.warner);
-        dc.put("Prithvi",R.drawable.shaw);
         dc.put("Marsh",R.drawable.marsh);
+        dc.put("Prithvi",R.drawable.shaw);
         dc.put("Axar",R.drawable.axar);
-        //dc.put("Warner",R.drawable.warner);
+        dc.put("Pant",R.drawable.pant);
 
         gt.put("Gill",R.drawable.gill);
         gt.put("Kane",R.drawable.kane);
@@ -318,8 +332,9 @@ public class MainActivity extends AppCompatActivity {
         srh.put("Markhram",R.drawable.aiden);
         srh.put("Mayank",R.drawable.mayank);
         srh.put("klassen",R.drawable.klassen);
-        srh.put("Phillips",R.drawable.phillips);
         srh.put("Tripathi",R.drawable.tripati);
+        srh.put("Cummins",R.drawable.cummins);
+
 
     }
 
@@ -509,6 +524,7 @@ public class MainActivity extends AppCompatActivity {
                         b++;
 
                     }
+
 
 
                     if (score1 == 7 || score1 == 19 || score1 == 29 || score1 == 37 || score1 == 44 || score1 == 52 || score1 == 60 || score1 == 68 || score1 == 73 || score1 == 85 || score1 == 94 ) {
@@ -876,12 +892,12 @@ public class MainActivity extends AppCompatActivity {
 
 
                         if (score1 >= 100) {
-                            System.out.println("India won");
-                            showAlertDialog(R.layout.winner, india);
+                            System.out.println(t1+" won");
+                            showAlertDialog(R.layout.winner, team1logo);
                             return;
                         } else if (score2 >= 100) {
-                            System.out.println("Australia won");
-                            showAlertDialog(R.layout.winner, australia);
+                            System.out.println(t2+" won");
+                            showAlertDialog(R.layout.winner, team2logo);
                             return;
                         }
 
@@ -889,7 +905,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if (out1 == 5) {
                             if (score2 > score1) {
-                                showAlertDialog(R.layout.winner, australia);
+                                showAlertDialog(R.layout.winner, team2logo);
                                 return;
                             } else {
                                 flag = 1;
@@ -897,7 +913,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (out2 == 5) {
                             if (score1 > score2) {
-                                showAlertDialog(R.layout.winner, india);
+                                showAlertDialog(R.layout.winner, team1logo);
                                 return;
                             } else {
                                 flag = 0;
@@ -909,11 +925,11 @@ public class MainActivity extends AppCompatActivity {
                         if (ov1 == 5.0 && ov2 == 5.0) {
                             if (score1 > score2) {
                                 System.out.println("India Won");
-                                showAlertDialog(R.layout.winner, india);
+                                showAlertDialog(R.layout.winner, team1logo);
                                 return;
                             } else if (score2 > score1) {
                                 System.out.println("Australia Won 3");
-                                showAlertDialog(R.layout.winner, australia);
+                                showAlertDialog(R.layout.winner, team2logo);
                                 return;
                             } else {
                                 System.out.println("Draw");
@@ -925,12 +941,12 @@ public class MainActivity extends AppCompatActivity {
                         if(out1==5 && ov2==5.0 || out2==5 && ov1==5.0)
                         {
                             if (score1 > score2) {
-                                System.out.println("India Won");
-                                showAlertDialog(R.layout.winner, india);
+//                                System.out.println("India Won");
+                                showAlertDialog(R.layout.winner, team1logo);
                                 return;
                             }else if (score2 > score1) {
-                                System.out.println("Australia Won 3");
-                                showAlertDialog(R.layout.winner, australia);
+//                                System.out.println("Australia Won 3");
+                                showAlertDialog(R.layout.winner, team2logo);
                                 return;
                             } else {
                                 System.out.println("Draw");
